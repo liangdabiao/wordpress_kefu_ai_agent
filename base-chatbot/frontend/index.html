@@ -1,0 +1,1013 @@
+ 
+ 
+    <div class="chatbot-container lwh-open-cbot">
+        <div class="custom-chatbot__image" onclick="lwhOpenCbotToggleChat()">
+            <button class="chat-button" onclick="openChat()">Chat</button>
+
+        </div>
+        <div class="custom-chatbot">
+
+            <div class="chat">
+                <div class="feedback-form">
+                    <div class="feedback-header">
+                        <p>Feedback</p>
+                        <p class="feedback__modal-close" onclick="lwhOpenCbotremoveFeedbackModal()"><i class="fa-solid fa-xmark"></i></p>
+                    </div>
+                    <form onsubmit="lwhOpenCbotsendFeedback(event)">
+                        <textarea name="feedback" id="feedback"  rows="4" required></textarea>
+                        <button type="submit">Send Feedback</button>
+                    </form>
+                    
+                </div>
+                <div class="loading">
+                    <p><i class="fa-solid fa-circle-notch fa-spin"></i></p>
+                    <p>Wait a moment</p>
+                </div>
+                <div class="popup">
+                    <p>Oops! Something went wrong!</h2>
+                </div>
+                <div class="chat__header">
+                    <div>
+                        <div class="chat__title"> AI Chatbot
+                            
+                        </div>
+                        <div>
+                            <div class="chat__status"><span></span> Offline</div>
+                           
+                        </div>
+                    </div>
+                    <div>
+                
+
+                        <div class="chat__close-icon" onclick="lwhOpenCbotToggleChat()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat__messages">
+                   
+
+
+                </div>
+
+
+                <div class="chat__input-area">
+                    <div class="selected-image-container">
+
+                    </div>
+                    <form id="messageForm" onsubmit="lwhOpenCbotonFormSubmit(event)">
+                        <div>
+                            <div class="input">
+
+
+                                <div>
+                                    <input type="text" id="message" name="message" placeholder="Type your message"
+                                        autocomplete="off" required>
+                                </div>
+
+                            </div>
+                            <div>
+                                <button type="submit" id="submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+ 
+<style>
+.lwh-open-cbot, .lwh-open-cbot :root {
+    --chatbot-width: 350px;
+    --chatbot-font-family: 'Segoe UI';
+    --chatbot-image-position-bottom: 5%;
+    --chatbot-image-position-right: 3%;
+    --chatbot-position-bottom: 6%;
+    --chatbot-position-right: 10%;
+    --chatbot-height:60vh;
+    --chatbot-border-color: #E4E3E3;
+    --chatbot-primary-color: #2B2A66;
+    --chatbot-secondary-color: #2c2b8e;
+    --chatbot-hover-color: #1e8ece;
+    --chatbot-bg-color: #F1F1F1;
+    --chatbot-scrollbar-track-color: #f3f3f3;
+    --chatbot-scrollbar-thumb-color: #d7d7d7;
+    --chatbot-scrollbar-thumb-hover-color: #949494;
+    --chatbot-button-disabled-color: grey;
+    --chatbot-popup-bg-color: #fff;
+    --chatbot-dot-color: grey;
+}
+
+.lwh-open-cbot *,
+.lwh-open-cbot *::after,
+.lwh-open-cbot *::before,
+.lwh-open-cbot *:focus {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.lwh-open-cbot *:focus {
+    box-shadow: none;
+}
+
+
+.lwh-open-cbot .custom-chatbot {
+    width: var(--chatbot-width);
+    font-family: var(--chatbot-font-family);
+    position: fixed;
+    bottom: var(--chatbot-position-bottom);
+    right: var(--chatbot-position-right);
+    overflow: hidden;
+    z-index: 9998;
+}
+
+.lwh-open-cbot .custom-chatbot .chat__messages__ai a {
+    color: var(--chatbot-primary-color);
+    text-decoration: none;
+}
+
+.lwh-open-cbot .chat {
+    background-color: white;
+    position: relative;
+    z-index: 9999;
+    border: 1.5px solid var(--chatbot-border-color);
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, display 0s linear 0.5s;
+}
+
+.lwh-open-cbot .chat.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
+
+.lwh-open-cbot .custom-chatbot__image {
+    position: fixed;
+    right: var(--chatbot-image-position-right);
+    bottom: var(--chatbot-image-position-bottom);
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.lwh-open-cbot .custom-chatbot button {
+    border: none;
+    background: none;
+}
+
+.lwh-open-cbot .custom-chatbot button>i {
+    color: var(--chatbot-primary-color);
+    font-size: 18px;
+}
+
+.lwh-open-cbot .custom-chatbot button:hover i {
+    color: var(--chatbot-hover-color);
+    cursor: pointer;
+}
+
+.lwh-open-cbot .custom-chatbot input[type='text'] {
+    border: none;
+    outline: none;
+    padding: 0;
+    box-shadow: none !important;
+}
+
+.lwh-open-cbot .chat__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1.5px solid var(--chatbot-border-color);
+    padding: 12px 10px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+}
+
+.lwh-open-cbot .chat__header>div:nth-child(1)>div:nth-child(2) {
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+    margin-top: 4px;
+}
+
+.lwh-open-cbot .chat__header .chat__new {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 6px 4px 6px;
+    background-color: var(--chatbot-primary-color);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.lwh-open-cbot .chat__header .chat__new:hover {
+    background-color: var(--chatbot-hover-color);
+}
+
+.lwh-open-cbot .chat__header>div:nth-child(2) {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.lwh-open-cbot .chat__export i,
+.lwh-open-cbot .chat__close-icon i {
+    display: block;
+}
+
+.lwh-open-cbot .chat__export i:hover,
+.lwh-open-cbot .chat__close-icon i:hover,
+.lwh-open-cbot .copy-text i:hover,
+.lwh-open-cbot .feedback-btn:hover,
+.lwh-open-cbot .feedback__modal-close:hover {
+    color: var(--chatbot-hover-color);
+    cursor: pointer;
+}
+
+.lwh-open-cbot .chat__export {
+    font-size: 12px;
+    cursor: pointer;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: -1px;
+}
+
+.lwh-open-cbot .chat__title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.lwh-open-cbot .chat__title span {
+    font-size: 12px;
+}
+
+.lwh-open-cbot .chat__status {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.lwh-open-cbot .chat__status span {
+    background-color: #68D391;
+    background-color: #acacac;
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-radius: 100px;
+}
+
+.lwh-open-cbot .chat__close-icon {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.lwh-open-cbot .chat__messages {
+    padding: 12px 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: var(--chatbot-height);
+    overflow-y: auto;
+    position: relative;
+}
+
+.lwh-open-cbot .chat__messages::-webkit-scrollbar,
+.lwh-open-cbot .chat__messages__ai code::-webkit-scrollbar {
+    width: 3px;
+    height: 5px;
+}
+
+.lwh-open-cbot .chat__messages::-webkit-scrollbar-track,
+.lwh-open-cbot .chat__messages__ai code::-webkit-scrollbar-track {
+    background: var(--chatbot-scrollbar-track-color);
+}
+
+.lwh-open-cbot .chat__messages::-webkit-scrollbar-thumb,
+.lwh-open-cbot .chat__messages__ai code::-webkit-scrollbar-thumb {
+    background: var(--chatbot-scrollbar-thumb-color);
+    border-radius: 100px;
+}
+
+.lwh-open-cbot .chat__messages::-webkit-scrollbar-thumb:hover,
+.lwh-open-cbot .chat__messages__ai code::-webkit-scrollbar-thumb:hover {
+    background: var(--chatbot-scrollbar-thumb-hover-color);
+}
+
+.lwh-open-cbot .chat__messages__user,
+.lwh-open-cbot .chat__messages__ai {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    width: calc(100% - 38px);
+}
+
+.lwh-open-cbot .chat__messages__user {
+    align-self: flex-end;
+}
+
+.lwh-open-cbot .chat__messages__user>div {
+    align-items: end;
+    align-self: flex-end;
+}
+
+.lwh-open-cbot .chat__messages__ai>div,
+.lwh-open-cbot .chat__messages__user>div {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lwh-open-cbot .chat__messages__ai p {
+    background-color: var(--chatbot-bg-color);
+    padding: 6px 12px;
+    border-radius: 0px 8px 8px 8px;
+    width: -moz-fit-content;
+    width: fit-content;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    position: relative;
+    padding-right: 20px;
+}
+
+.lwh-open-cbot .chat__messages__ai .code-snippet {
+    background-color: rgb(27, 27, 27);
+    border-radius: 8px;
+}
+
+.lwh-open-cbot .chat__messages__ai pre {
+    display: flex;
+    overflow: hidden;
+}
+
+.lwh-open-cbot .chat__messages__ai code {
+    display: block;
+    padding: 10px;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    color: #f8f8f8;
+    overflow-x: auto;
+    word-break: normal;
+    word-spacing: normal;
+    white-space: pre;
+    align-self: flex-start;
+    text-align: left;
+}
+
+.lwh-open-cbot .snippet-header {
+    background: rgb(164, 164, 164);
+    border-radius: 8px 8px 0 0;
+    padding: 6px 12px;
+}
+
+.lwh-open-cbot .snippet-header button {
+    cursor: pointer;
+    color: rgb(55 55 55);
+    font-weight: 600;
+}
+
+.lwh-open-cbot .chat__messages__ai img:not(.bot-image) {
+    padding: 6px 12px;
+    border-radius: 0px 8px 8px 8px;
+    align-self: flex-start;
+    border: 1.5px solid var(--chatbot-bg-color);
+    max-width: 160px;
+}
+
+.lwh-open-cbot .chat__messages__user p {
+    background-color: var(--chatbot-primary-color);
+    padding: 6px 12px;
+    border-radius: 8px 8px 0px 8px;
+    color: white;
+    width: -moz-fit-content;
+    width: fit-content;
+    align-self: flex-end;
+}
+
+.lwh-open-cbot .chat__messages__user img:not(.avatar-image) {
+    padding: 6px 12px;
+    border-radius: 8px 8px 0px 8px;
+    align-self: flex-end;
+    border: 1.5px solid var(--chatbot-primary-color);
+    max-width: 160px;
+}
+
+.lwh-open-cbot .chat__input-area {
+    padding: 12px 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.lwh-open-cbot .chat__input-area>form {
+    border: 2px solid var(--chatbot-border-color);
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+.lwh-open-cbot .chat__input-area>form>div {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.lwh-open-cbot .chat__input-area .input {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    align-items: center;
+}
+
+.lwh-open-cbot .chat__input-area .input label {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.lwh-open-cbot .chat__input-area .input label:hover {
+    color: var(--chatbot-secondary-color);
+    cursor: pointer;
+    opacity: 1;
+}
+
+.lwh-open-cbot .chat__input-area .input>div:nth-child(1),
+.lwh-open-cbot .chat__input-area .input input {
+    width: 100%;
+    font-size: 16px;
+}
+
+.lwh-open-cbot .custom-chatbot button[disabled] i {
+    cursor: not-allowed;
+    color: var(--chatbot-button-disabled-color);
+}
+
+.lwh-open-cbot .popup {
+    display: none;
+    width: 100%;
+    position: absolute;
+    background-color: var(--chatbot-popup-bg-color);
+    padding: 12px;
+    border-radius: 4px;
+    top: 1%;
+    opacity: 0;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.lwh-open-cbot .popup-animation {
+    animation: slideInRight 0.5s ease forwards, fadeOut 2s ease forwards 3s;
+}
+
+.lwh-open-cbot .popup p {
+    color: var(--chatbot-popup-text-color);
+}
+
+.lwh-open-cbot .popup .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        fill: transparent;
+    }
+}
+
+.lwh-open-cbot .dot {
+    animation: 1s blink infinite;
+    fill: var(--chatbot-dot-color);
+}
+
+.lwh-open-cbot .dot:nth-child(2) {
+    animation-delay: 250ms;
+}
+
+.lwh-open-cbot .dot:nth-child(3) {
+    animation-delay: 500ms;
+}
+
+.lwh-open-cbot .loading {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+.lwh-open-cbot .copy-text {
+    cursor: pointer;
+    font-size: 12px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.lwh-open-cbot .copy-text span {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 4px;
+    padding: 0px 6px 1px 6px;
+    color: black;
+    border: 1px solid var(--chatbot-border-color);
+}
+
+.lwh-open-cbot .avatar-image {
+    display: block;
+}
+
+.lwh-open-cbot .startup-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    position: absolute;
+    bottom: 0;
+}
+
+.lwh-open-cbot .startup-btns p {
+    padding: 6px 10px;
+    border: 1px solid var(--chatbot-border-color);
+    border-radius: 4px;
+    width: -moz-fit-content;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.lwh-open-cbot .startup-btns p:hover {
+    background-color: var(--chatbot-hover-color);
+    color: white;
+}
+
+.lwh-open-cbot .feedback-form {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    display: none;
+}
+
+.lwh-open-cbot .feedback-form.show {
+    display: flex;
+}
+
+.lwh-open-cbot .feedback-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 0 0.8rem 0;
+}
+
+.lwh-open-cbot .feedback-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.lwh-open-cbot .feedback-form textarea {
+    width: 100%;
+    border: 2px solid var(--chatbot-border-color);
+    outline: none;
+    padding: 6px;
+    font-size: 16px;
+}
+
+.lwh-open-cbot .feedback-form button {
+    background: var(--chatbot-primary-color);
+    padding: 0.7rem;
+    color: white;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.lwh-open-cbot .feedback-form button[disabled] {
+    cursor: not-allowed;
+    background-color: var(--chatbot-button-disabled-color) !important;
+}
+
+.lwh-open-cbot .feedback-form button:hover {
+    background: var(--chatbot-hover-color);
+}
+
+.lwh-open-cbot .footer-area {
+    padding: 0 10px 10px 10px;
+    font-size: 11px;
+    display: none;
+}
+
+.lwh-open-cbot .footer-area a {
+    text-decoration: none;
+}
+	
+.chat-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    padding: 10px;
+}
+.chat-button:hover {
+    background-color: #45a049; /* 悬停时深绿色 */
+}
+
+@media (max-width: 679px) {
+    .lwh-open-cbot .custom-chatbot {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        right: auto;
+        bottom: auto;
+    }
+}
+</style>
+
+
+
+ <script>
+const apiUrl = 'https://127.0.0.1/wp-json/myapi/v1/chat-bot/';
+const botConfigurationUrl = 'https://127.0.0.1/wp-json/myapi/v1/chat-bot-config';
+const copyButtons = document.querySelectorAll('.lwh-open-cbot .copy-button');
+const button = document.querySelector('.lwh-open-cbot #submit-btn');
+let messageInput = document.querySelector('.lwh-open-cbot #message');
+let content = [];
+let botConfigData = '';
+let conversationTranscript = [];
+
+function lwhOpenCbotToggleChat() {
+    const chatWindow = document.querySelector(".lwh-open-cbot .chat");
+    chatWindow.classList.toggle('show');
+    if(chatWindow.classList.contains('show')){
+        document.querySelector(".lwh-open-cbot .custom-chatbot").style.zIndex = '9999'
+    }
+    else{
+        document.querySelector(".lwh-open-cbot .custom-chatbot").style.zIndex = '9998'
+    }
+}
+
+function lwhOpenCbotonFormSubmit(event, userMessage) {
+    event.preventDefault();
+    if(button.disabled == true) return
+    let message;
+    if(userMessage == undefined){
+        message = messageInput.value.trim();
+        document.querySelector(".lwh-open-cbot .startup-btns").style.display = "none";
+    }
+    else{
+        message = userMessage;
+    }
+    content.push({
+        role: 'user',
+        message: message,
+    });
+    let timestamp = new Date().toLocaleString();
+    conversationTranscript.push({
+        sender: 'user',
+        time: timestamp,
+        message: message,
+    });
+    data = "";
+    if (message !== '') {
+        lwhOpenCbotaddMessage('user', message);
+        messageInput.value = '';
+        lwhOpenCbotaddTypingAnimation('ai');
+        lwhOpenCbotfetchData()
+    }
+}
+
+function lwhOpenCbotaddMessage(sender, message) {
+    let chatMessagesContainer = document.querySelector('.lwh-open-cbot .chat__messages');
+    let messageContainer = document.createElement('div');
+    messageContainer.classList.add('chat__messages__' + sender);
+    let messageDiv = document.createElement('div');
+    messageDiv.innerHTML = `
+            ${sender === 'ai' ?
+            `
+                <div>
+                <img width="30px" class="bot-image"
+                    src="${botConfigData.botImageURL}"
+                    alt="bot-image">
+                </div>
+                `
+            : ""
+        }
+            <p>${message}
+             </p>
+            ${sender === 'user' ?
+            `
+                <div>
+                <img width="30px" class="avatar-image"
+                    src="${botConfigData.userAvatarURL}"
+                    alt="avatar">
+                </div>
+                `
+            : ""
+        }
+        `;
+    messageContainer.appendChild(messageDiv);
+    chatMessagesContainer.appendChild(messageContainer);
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+}
+
+function lwhOpenCbotaddTypingAnimation(sender) {
+    let chatMessagesContainer = document.querySelector('.lwh-open-cbot .chat__messages');
+    let typingContainer = document.createElement('div');
+    typingContainer.classList.add('chat__messages__' + sender);
+    let typingAnimationDiv = document.createElement('div');
+    typingAnimationDiv.classList.add('typing-animation');
+    typingAnimationDiv.innerHTML = `
+        <div>
+        <img width="30px" class="bot-image"
+            src="${botConfigData.botImageURL}"
+            alt="">
+        </div>
+  <p>
+  <svg height="16" width="40" style="max-height: 20px;">
+    <circle class="dot" cx="10" cy="8" r="3" style="fill:grey;" />
+    <circle class="dot" cx="20" cy="8" r="3" style="fill:grey;" />
+    <circle class="dot" cx="30" cy="8" r="3" style="fill:grey;" />
+  </svg>
+</p>
+  `;
+    typingContainer.appendChild(typingAnimationDiv);
+    chatMessagesContainer.appendChild(typingContainer);
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+}
+
+function lwhOpenCbotreplaceTypingAnimationWithMessage(sender, message) {
+    let chatMessagesContainer = document.querySelector('.lwh-open-cbot .chat__messages');
+    let typingContainer = document.querySelector('.lwh-open-cbot .chat__messages__' + sender + ':last-child');
+    if (typingContainer) {
+        let messageContainer = document.createElement('div');
+        messageContainer.classList.add('chat__messages__' + sender);
+        messageContainer.classList.add('chat_messages_ai');
+        let messageDiv = document.createElement('div');
+        messageDiv.innerHTML = `
+                ${sender === 'ai' ?
+                `
+                    <div>
+                    <img width="30px" class="bot-image"
+                        src="${botConfigData.botImageURL}"
+                        alt="bot-image">
+                    </div>
+                    `
+                : ""
+            }
+                <p class="typing-effect"></p>
+                ${sender === 'user' ?
+                `
+                    <div>
+                    <img width="30px" class="avatar-image"
+                        src="${botConfigData.userAvatarURL}"
+                        alt="avatar">
+                    </div>
+                    `
+                : ""
+            }
+            `;
+        messageContainer.appendChild(messageDiv);
+        typingContainer.parentNode.replaceChild(messageContainer, typingContainer);
+        const typingEffectElement = messageDiv.querySelector(".typing-effect");
+        let index = 0;
+        const typingInterval = setInterval(() => {
+            typingEffectElement.textContent += message[index];
+            index++;
+            if (index === message.length) {
+                clearInterval(typingInterval);
+                typingEffectElement.insertAdjacentHTML('beforeend', `<span title="copy" class="copy-text" onclick="lwhOpenCbotcopyText(event)"><i class="fa-regular fa-copy"></i><span>copied</span></span>`);
+                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+            }
+        }, 5);
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+    }
+}
+
+function lwhOpenCbotremoveTypingAnimation() {
+    let typingAnimationDivs = document.querySelectorAll('.lwh-open-cbot .typing-animation');
+    typingAnimationDivs.forEach(function (typingAnimationDiv) {
+        let chatMessagesAiDiv = typingAnimationDiv.closest('.chat__messages__ai');
+        if (chatMessagesAiDiv) {
+            chatMessagesAiDiv.parentNode.removeChild(chatMessagesAiDiv);
+        }
+    });
+}
+
+copyButtons.forEach(button => {
+    button.addEventListener('click', function (event) {
+        const codeElement = this.parentNode.nextElementSibling.querySelector('code');
+        const codeText = codeElement.textContent;
+        navigator.clipboard.writeText(codeText).then(function () {
+            event.target.innerText = "Copied";
+            setTimeout(() => {
+                event.target.innerText = "Copy";
+            }, 2000);
+        }).catch(function (error) {
+            console.error('Error copying code: ', error);
+        });
+    });
+});
+
+function lwhOpenCbotcopyText(event) {
+    const paragraph = event.target.closest('p');
+    const clone = paragraph.cloneNode(true);
+    clone.querySelectorAll('.copy-text').forEach(elem => {
+        elem.parentNode.removeChild(elem);
+    });
+    const textToCopy = clone.textContent.trim();
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const copiedSpan = event.target.nextElementSibling;
+            copiedSpan.style.display = 'block';
+            setTimeout(() => {
+                copiedSpan.style.display = 'none';
+            }, 2000);
+        })
+        .catch(error => {
+            console.error('Error copying text: ', error);
+        });
+}
+
+async function lwhOpenCbotfetchData() {
+    button.disabled = true;
+    try {
+        response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "last_prompt": content[content.length - 1].message,
+                "conversation_history": content.map(item => ({
+                    "role": item.role,
+                    "content": item.message
+                }))
+            })
+        });
+        if (response.ok) {
+            data = await response.json();
+            console.log(data, "Data from api");
+            button.disabled = false;
+            if (!data.success) {
+                lwhOpenCbotremoveTypingAnimation()
+                lwhOpenCbotshowPopup('Oops! Something went wrong!', '#991a1a');
+                throw new Error("Something went wrong. Please Try Again!");
+            }
+        } else {
+            lwhOpenCbotshowPopup('Oops! Something went wrong!', '#991a1a');
+            throw new Error("Request failed. Please try again!");
+        }
+        content.push({
+            role: 'assistant',
+            message: data.result,
+        });
+        let timestamp = new Date().toLocaleString();
+        conversationTranscript.push({
+            sender: 'bot',
+            time: timestamp,
+            message: data.result,
+        });
+        lwhOpenCbotreplaceTypingAnimationWithMessage('ai', data.result);
+    } catch (error) {
+        lwhOpenCbotremoveTypingAnimation();
+        lwhOpenCbotshowPopup('Oops! Something went wrong!', '#991a1a');
+        console.error('There was a problem with the fetch operation:', error);
+        return;
+    }
+}
+
+async function lwhOpenCbotfetchBotConfiguration() {
+    const chatMessagesContainer = document.querySelector(".lwh-open-cbot .chat__messages");
+    document.querySelector(".lwh-open-cbot .loading").style.display = 'flex';
+    chatMessagesContainer.innerHTML = '';
+    let startupBtnsDiv = document.createElement('div');
+    startupBtnsDiv.classList.add('startup-btns');
+    chatMessagesContainer.appendChild(startupBtnsDiv);
+    let botResponse = ''
+    try {
+        botResponse = await fetch(botConfigurationUrl);
+        if (botResponse.ok) {
+            botConfigData = await botResponse.json();
+            console.log(botConfigData, "Data from api");
+            chatMessagesContainer.style.fontSize = `${botConfigData.fontSize}px`;
+            let startupBtns=''
+            const startupBtnContainer = document.querySelector('.lwh-open-cbot .startup-btns');
+            botConfigData.commonButtons.forEach(btn => {
+                startupBtns += `<p onclick="lwhOpenCbotonFormSubmit(event, '${btn.buttonPrompt}'); lwhOpenCbothandleStartupBtnClick(event);">${btn.buttonText}</p>`;
+            });            
+            startupBtnContainer.innerHTML = startupBtns;
+            if (botConfigData.botStatus == 1) {
+                document.querySelector(".lwh-open-cbot .chat__status").innerHTML = `<span></span> Online`;
+                document.querySelector(".lwh-open-cbot .chat__status").querySelector("span").style.background = "#68D391";
+            }
+           
+            document.querySelector(".lwh-open-cbot .loading").style.display = 'none';
+            lwhOpenCbotaddMessage('ai', botConfigData.StartUpMessage);
+            content.push({
+                role: 'assistant',
+                message: botConfigData.StartUpMessage,
+            });
+            let timestamp = new Date().toLocaleString();
+            conversationTranscript.push({
+                sender: 'bot',
+                time: timestamp,
+                message: botConfigData.StartUpMessage,
+            });
+        } else {
+            document.querySelector(".lwh-open-cbot .loading").style.display = 'none';
+            lwhOpenCbotshowPopup('Oops! Something went wrong!', '#991a1a');
+            throw new Error("Request failed. Please try again!");
+        }
+    } catch (error) {
+        lwhOpenCbotshowPopup('Oops! Something went wrong!', '#991a1a');
+        button.disabled = true
+        console.error('There was a problem with the fetch operation:', error);
+        return;
+    }
+}
+
+function lwhOpenCbotshowPopup(val, color) {
+    button.disabled = false;
+    const popup = document.querySelector('.lwh-open-cbot .popup');
+    popup.style.display = 'block';
+    popup.style.opacity = 1;
+    const innerPopup = popup.querySelector('p');
+    innerPopup.innerText = val;
+    innerPopup.style.color = color;
+    popup.classList.add('popup-animation');
+    setTimeout(() => {
+        popup.classList.remove('popup-animation');
+        popup.style.display = 'none';
+        popup.style.opacity = 0;
+    }, 3000);
+}
+
+
+function lwhOpenCbothandleStartupBtnClick(event){
+    const startupBtnContainer = event.target.parentNode;
+    startupBtnContainer.style.display = 'none';
+}
+
+lwhOpenCbotfetchBotConfiguration();
+
+</script>
+ 
