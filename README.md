@@ -1,23 +1,22 @@
 ## 适合wordpress 的自适应智能客服项目
 
-### **不用coze/dify，自己编程做一个可控的能够完成工作的客服：**
+**不用coze/dify，自己编程做一个可控的能够完成工作的客服：**
+
 coze/dify这类平台的缺点是适合非程序员，很难可控，同时复杂度也不低。那么适合程序员的智能客服，可以编程来实现，只需要2个简单文件，稍微配置一下就实现，也许值得试试，以下我介绍我的方案。
 
 ### 一般的客服是什么功能：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/5e81fcf31b1846728520e5c9aedaa56b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751045189&x-orig-sign=q0aVHf0vNt9rD5NbUMnsX4MQDMo%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/5e81fcf31b1846728520e5c9aedaa56b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=wsBI01%2BFrzfHeJtrVJCM%2FU8Ymqw%3D)
 这是一般的客服，能够回答问题。但是缺点就是无法类似人类客服那样，能够办理业务，真正工作。
-
-
 
 **例如客服遇到的麻烦：**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/324cb4f3545a438b9be0eda4f3df874d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751045770&x-orig-sign=JrR4Gq8yQfHW8uyE6nCoMyG4M6w%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/324cb4f3545a438b9be0eda4f3df874d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=cDJGuhrMsvK9JXa%2BninFZ6MHO4o%3D)
 
 因为输入输出和交互过程都是模糊的，一般客服的那种（查询知识库-》回答），这模式很难解决客户问题，客户不想和AI说话。
 
-
 #### 解决方法：
+
 客服需要意图识别和收集用户数据，进行api调用和回答正常，对用户有帮助，办理好业务。
 例如以下就是一个办理业务的对话：
 
@@ -37,24 +36,23 @@ coze/dify这类平台的缺点是适合非程序员，很难可控，同时复�
   4. 返回结果：向用户展示函数返回的配送日期（如  *“您的订单预计在2025年6月25日18:00前送达”* ）。
 ```
 
-
 #### coze / dify 怎样解决：
-首先，我还是介绍一下coze,dify 它们的客服方案是怎样的，对比起来理解我新的方案有什么好处：
 
+首先，我还是介绍一下coze,dify 它们的客服方案是怎样的，对比起来理解我新的方案有什么好处：
 
 coze的解决方法：
 
 意图识别：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/5baed1789edd40e69b246061fdb3e25e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751045324&x-orig-sign=dHCa1BGdv8JzDX1X9vR%2ByD%2FG9do%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/5baed1789edd40e69b246061fdb3e25e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=cuHlSorFNGGPVl5Ye5RO8pTffLk%3D)
 
 多分支意图识别：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/073cfaaed3ca4d54b023ab83b8e56b35~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751045542&x-orig-sign=k3vd77CU0kMpBBKjdhZ3mLdgsUY%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/073cfaaed3ca4d54b023ab83b8e56b35~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=6P57UyytOKm60Bj5Q%2BJQEwRoFaw%3D)
 
 复杂的提示语指引用户，指引AI, 能够按流程 输入输出和走好流程：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/3e3400a928944efea1d737943a3c149f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751045601&x-orig-sign=27qYey%2F1hVRfJ2zWYzwrjfttx7U%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/3e3400a928944efea1d737943a3c149f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=t9vtfp0Ho5l3DNTmHJHY9TYHGZY%3D)
 
 麻烦就是： 很简单的业务都会很难搭建流程，因为输入输出和过程都很多模糊和条件分支：
 
@@ -128,11 +126,10 @@ coze的解决方法：
 
 - 只能输出物流场景、支付场景、售后场景、无明确场景中的一个场景，不要输出其他无关内容！！！！
 ```
+
 **需要搭建复杂coze:**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d0c5dc74105248038ea79afc6679b896~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751045731&x-orig-sign=2QvhBniF9D7NqlFf%2Bt%2FE1tMEDTY%3D)
-
-
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d0c5dc74105248038ea79afc6679b896~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=ZX2xuYKwXoPUXWt%2BbAh9tvPXhTg%3D)
 
 ### 自适应智能体方案：
 
@@ -140,10 +137,10 @@ coze的解决方法：
 
 "Agentic agent" 可以翻译为 ​**​“能动性智能体”​**​ 或 ​**​“自主行为体”​**。
 
- 具体解释：
+具体解释：
 
--   ​**Agentic**​ 强调自主性、能动性和主动行为的能力。
--   ​**Agent**​ 在人工智能和认知科学中通常译为“智能体”或“行为体”。
+*   ​**Agentic**​ 强调自主性、能动性和主动行为的能力。
+*   ​**Agent**​ 在人工智能和认知科学中通常译为“智能体”或“行为体”。
 
 生成式 AI 客服的核心其实是通过大语言模型，构建智能体。
 
@@ -156,8 +153,6 @@ coze的解决方法：
 · 记忆还可以保持上下文、多轮对话状态；
 
 · 对话策略促使智能体主动引导、符合品牌风格。
-
-
 
 这种架构让 AI 客服能够**感知用户意图**、**决策流程**、**调用相关数据或动作**（如查库存、发票、物流）并生成自然语言回复。
 
@@ -218,62 +213,62 @@ coze的解决方法：
 - 不私自编造数据；若信息不明确，提示用户补充；如涉及政治、宗教或成本等无关内容，拒绝回复。    
 - 遇复杂或纠纷问题，需引导转人工客服，确保处理无缝。
 ```
+
 ### 阿里百炼平台
+
 这种是能够智能的调用知识库，识别意图和运行对应流程，自动调用api，自动填充参数，自动按反馈情况回答问题。我推荐阿里百炼平台，是很好的完成Agentic agent自适应智能体的工作。如下是我的一个客服例子：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d7c30ee28a0941818d78284475a17e3d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751046683&x-orig-sign=fBDjCJNlI3riRHugOyBxuokFAZc%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d7c30ee28a0941818d78284475a17e3d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=Xr%2BdDlo7E5MUN6jVASKlQo9asnk%3D)
 
 ### 我的新方案：
+
 介绍完目前行业的主流方案，其实大部分情况用这些方案也是简单有效的。但是程序员往往需要可控的，真实工业级的客服，能够很好的回答问题，能够很好的完成业务，可以调试，简单高效。那么，我研究出以下简单的方案（只需要2个python文件），也是可以达到：
 下面是展示一些例子：
 用户查询订单：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/78ac1b4ae6a1498b891b8061e6b8bf53~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751046831&x-orig-sign=MumgcFDPK51kAQXq76oneK3Tlt0%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/78ac1b4ae6a1498b891b8061e6b8bf53~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=ltq9CFjw1fFB7Uie6S1mr1KZYRg%3D)
 
 用户留言：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/c4b178449c2a468bb3a84b582de5a61f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751046871&x-orig-sign=vo6sYZfmCdg7uaQYiZnPvKuEibg%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/c4b178449c2a468bb3a84b582de5a61f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=ovpQ7S78VUTE7WXw%2FzTz9Ps3qMM%3D)
 
 用户咨询知识库：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d1a4da36d84f40949cf9b836e1f844d8~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751046899&x-orig-sign=fm2G0njL%2FJtO%2BHdoDo3T3BVHG70%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d1a4da36d84f40949cf9b836e1f844d8~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=PzUS8mwJgf2sdF8BYkZhMlt3YjY%3D)
 
 用户问FAQ：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/94cf72e844184dfab499c341a478db1a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751046931&x-orig-sign=KwSfGI1UyvNxQwny0%2Bmw6zhkVCo%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/94cf72e844184dfab499c341a478db1a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=5O0qPGS4xerVA8GxUMxSvI2QTME%3D)
 
 用户查看商品：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/22baf0ec515f4a8ab76540f74e87816b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751046967&x-orig-sign=k5Mz%2Fn8WryrIUNFqbJYCJ%2F9LLAY%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/22baf0ec515f4a8ab76540f74e87816b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=UhtEmruf37%2BYb%2FXW2iOTpZISTdg%3D)
 
 客服前端UI:
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/6f17ef1895cd4ee39ef7c771348c6f73~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751047076&x-orig-sign=Mt7Cm%2Bk7O0OIiZYBLGlggHV6G8s%3D)
-
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/6f17ef1895cd4ee39ef7c771348c6f73~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=zGiF1%2B5AkE3jxWY7TH7hW4n%2B3QE%3D)
 
 项目底层是基于 openai的agent ：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/20e4b48ea5c14db58b14364947a58749~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751047011&x-orig-sign=IOgbae79joNKRxVg3cz0GWixVHo%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/20e4b48ea5c14db58b14364947a58749~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=kKyAIIuhwwWCjTI%2FMLVePWisUAY%3D)
 
 **代码简单介绍：**
 
 1 建立各种tool工具：
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/fc84723ee8d5429aa2532b9bed0bac3f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751047626&x-orig-sign=Vji%2BQBZcL3WPgkHvvSLFH%2F5C32Y%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/fc84723ee8d5429aa2532b9bed0bac3f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=3NxURfA6SidsUJIKeW5m0aywZxY%3D)
 
 2 建立对应的多个agent智能体：
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/01f0b7cc00f04e6c9672583a94b6aa60~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751047710&x-orig-sign=8J3ZD8Y3qEybd4qbfFoZ4ID6cRA%3D)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/01f0b7cc00f04e6c9672583a94b6aa60~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=5iVF%2Fu3kHn3sLHiqroc2DZZNKA4%3D)
 
 3 就这么简单，简单配置（或者让AI写代码），一下子就搞出一个更好的客服。
 
 ### 开源地址：
-https://github.com/liangdabiao/Business_Idea_Validator
 
+<https://github.com/liangdabiao/wordpress_kefu_ai_agent>
 
 代码模块包括： 客服agent， agent前端调试， 客服前端UI 。而功能调用，目前主要是利用了wordpress+woocommerce作为例子，换成其他都可以。
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/356641e8026b4f4895aa7d9fd6b41b36~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751047229&x-orig-sign=ArX4NlUQ1yy1%2BWRLd6KALwmyUqo%3D)
-
-
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/356641e8026b4f4895aa7d9fd6b41b36~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=Zsmyw1FHUnl1bsiGpdZB%2Fck0ZYo%3D)
 
 
 
