@@ -257,7 +257,7 @@ coze的解决方法：
 **代码简单介绍：**
 
 1 建立各种tool工具：
-![image.png](hhttps://linux.do/uploads/default/optimized/4X/5/1/9/519d7a1bb5001b0fcc0d7bf9daf1ada7b8a4f94d_2_988x750.jpeg)
+![image.png](https://linux.do/uploads/default/optimized/4X/5/1/9/519d7a1bb5001b0fcc0d7bf9daf1ada7b8a4f94d_2_988x750.jpeg)
 
 2 建立对应的多个agent智能体：
 
