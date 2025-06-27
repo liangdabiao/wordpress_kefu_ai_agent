@@ -8,7 +8,7 @@ coze/dify这类平台的缺点是适合非程序员，很难可控，同时复�
 
 ### 一般的客服是什么功能：
 
-![image.png]([https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/5e81fcf31b1846728520e5c9aedaa56b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgbGlhbmdkYWJpYW8=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjg5MzU3MDMzMjY5NjA5MyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751567346&x-orig-sign=wsBI01%2BFrzfHeJtrVJCM%2FU8Ymqw%3D](https://linux.do/uploads/default/original/4X/0/f/a/0faaabe2febc06cd1c2d3dfa81a82226cee9031c.jpeg))
+![image.png](https://linux.do/uploads/default/original/4X/0/f/a/0faaabe2febc06cd1c2d3dfa81a82226cee9031c.jpeg)
 这是一般的客服，能够回答问题。但是缺点就是无法类似人类客服那样，能够办理业务，真正工作。
 
 **例如客服遇到的麻烦：**
